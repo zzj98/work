@@ -86,7 +86,7 @@ http.createServer(function (request, response) {
                     // response.write("======================================="+params["name"]+"~~"+params["password"]);
                     // response.write(util.inspect(params));
                     // response.end("数据提交完毕");
-                    // response.writeHead(200, {'Content-Type': 'text/html; charset=utf8'});
+                    response.writeHead(200, {'Content-Type': 'text/html; charset=utf8'});
 
                     if(postData.name) { // 输出提交的数据
                         fs.readFile('./index/template.html', 'utf-8', function (err,data) {
