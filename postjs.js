@@ -33,8 +33,13 @@ http.createServer(function (request, response) {
                 // console.log(name);
                 name = request.query.name;
                 response.writeHead(200, {'Content-Type': 'text/plain'});
+                fs.readFile('./index/result.html', 'utf-8', function (err,data) {
+                    console.log(data);
+                    data = data.replace('{{**name**}}',name);
+                    response.end(data);
+                });
                 // console.log(name);
-                response.end(name);
+                // response.end(name);
             }else if(pathname === "/post"){
                 response.writeHead(200, {'Content-Type': 'text/html; charset=utf8'});
                 // response.write(postHTML);
