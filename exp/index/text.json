@@ -1,7 +1,25 @@
 {
-  "username":"aaa",
-  "pwd":123,
-  "name":"朱智杰",
-  "gender":"man",
-  "professional":"软件工程"
+  "aaa": [
+    {
+      "username": "zzj",
+      "pwd": 1998,
+      "name": "朱智杰",
+      "gender": "man",
+      "professional": "软件工程"
+    },
+    {
+      "username": "aaa",
+      "pwd": 123,
+      "name": "aaa",
+      "gender": "man",
+      "professional": "软件工程"
+    },
+    {
+      "username": "asd",
+      "pwd": "asd",
+      "name": "asd",
+      "gender": "man",
+      "professional": "软件工程"
+    }
+  ]
 }

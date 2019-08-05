@@ -7,7 +7,6 @@ app.use('/static', express.static('index'));
 
 //设置模板引擎为ejs
 app.set('view engine','ejs') ; //app = express() ;
-//设置模板文件位置 => 项目根路径下views目录为模板文件存放目录
 app.set('views', __dirname + '/views') ;
 
 // app.get('/',function(req,res) {
@@ -18,19 +17,24 @@ app.set('views', __dirname + '/views') ;
 
 app.get('/get', function (req, res) {
     var parseObj = url.parse(req.url, true);
+    var flag = false;
     req.query = parseObj.query;
     // res.send('Hello World');
     var text = require('./index/text');//要获取的json文件
-    if (req.query.name === text.username && req.query.pwd == text.pwd){
-        res.render('index',{
-            username:text.username,
-            pwd:text.pwd,
-            name:text.name,
-            gender:text.gender,
-            professional:text.professional,
-        }) ;
-    }else {
-        res.send('404 THIS A ERR!')
+    for (var i = 0 ; i<text.aaa.length ; i++){
+        if (req.query.name === text.aaa[i].username && req.query.pwd == text.aaa[i].pwd){
+            res.render('index',{
+                username:text.aaa[i].username,
+                pwd:text.aaa[i].pwd,
+                name:text.aaa[i].name,
+                gender:text.aaa[i].gender,
+                professional:text.aaa[i].professional,
+            }) ;
+            flag = true;
+        }
+    }
+    if (flag == false){
+        res.send('404 THIS IS A ERR!')
     }
 });
 
