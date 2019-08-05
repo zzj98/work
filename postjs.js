@@ -32,7 +32,7 @@ http.createServer(function (request, response) {
             if (pathname === "/get"){
                 // console.log(name);
                 name = request.query.name;
-                response.writeHead(200, {'Content-Type': 'text/plain'});
+                response.writeHead(200, {'Content-Type': 'text/html;charset=utf8'});
                 fs.readFile('./index/result.html', 'utf-8', function (err,data) {
                     console.log(data);
                     data = data.replace('{{**name**}}',name);
