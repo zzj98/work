@@ -1,5 +1,4 @@
-{
-  "aaa": [
+[
     {
       "username": "zzj",
       "pwd": 1998,
@@ -10,7 +9,7 @@
     {
       "username": "aaa",
       "pwd": 123,
-      "name": "aaa",
+      "name": "bbb",
       "gender": "man",
       "professional": "软件工程"
     },
@@ -22,4 +21,3 @@
       "professional": "软件工程"
     }
   ]
-}

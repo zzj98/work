@@ -1,26 +1,35 @@
 <body>
 <div class="box">
     <div class="content">
-        <table>
+        <table width="250px">
             <tr>
-                <td>Username:</td>
-                <td><%= username %></td>
+                <td colspan="3">id:</td>
+                <td colspan="3"><%= id %></td>
             </tr>
             <tr>
-                <td>Password:</td>
-                <td><%= pwd %></td>
+                <td colspan="3">Username:</td>
+                <td colspan="3"><%= username %></td>
             </tr>
             <tr>
-                <td>Name:</td>
-                <td><%= name %></td>
+                <td colspan="3">Password:</td>
+                <td colspan="3"><%= pwd %></td>
             </tr>
             <tr>
-                <td>Gender:</td>
-                <td><%= gender %></td>
+                <td colspan="3">Name:</td>
+                <td colspan="3"><%= name %></td>
             </tr>
             <tr>
-                <td>Professional:</td>
-                <td><%= professional %></td>
+                <td colspan="3">Gender:</td>
+                <td colspan="3"><%= gender %></td>
+            </tr>
+            <tr>
+                <td colspan="3">Professional:</td>
+                <td colspan="3"><%= professional %></td>
+            </tr>
+            <tr>
+                <td colspan="2"><a href="./static/add.html">添加用户</a></td>
+                <td colspan="2"><a href="/del/<%= id %>">删除用户</a></td>
+                <td colspan="2"><a href="/toUpdate/<%= id %>">修改信息</a></td>
             </tr>
         </table>
     </div>

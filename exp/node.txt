@@ -1,0 +1,16 @@
+查看数据表的编码：
+ show create table Student;
+
+修改表的编码方式：
+ alter table Student default character set utf8;
+该命令用于将表Student的编码方式改为utf8；
+
+修改字段的编码方式：
+ alter table Student change Sname Sname varchar(20) character set utf8;
+该命令用于将表Student中Sname字段的编码方式改为utf8
+
+插入中文出错
+    1：修改服务器配置文件
+    https://www.jianshu.com/p/9955591c4a31
+    2：修改表单格式为utf-8
+    https://blog.csdn.net/weixin_44092289/article/details/86931898

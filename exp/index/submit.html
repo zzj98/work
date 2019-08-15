@@ -4,13 +4,38 @@
     <meta charset="UTF-8">
     <title>Flash Login</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="./js/jquery-3.4.1.min.js"></script>
 </head>
 <body>
-<form class="box" action="/get" method="get">
-    <h1>Login</h1>
-    <input type="text" name="name" placeholder="Username">
-    <input type="text" name="pwd" placeholder="Password">
-    <input type="submit" value="Login">
-</form>
+<div class="bbackground" style="">
+    <form class="box" action="/get" method="get">
+        <h1>Login</h1>
+        <input type="text" name="name" placeholder="Username">
+        <input type="text" name="pwd" placeholder="Password">
+        <input type="button" name="btn" value="注册">
+        <input type="button" name="btn" value="修改">
+        <input type="submit" value="Login">
+    </form>
+</div>
 </body>
+<script>
+    $.ajax({
+        url: "/submit",
+        type: "get",
+        contentType: "application/json;charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            console.log(data);
+            console.log(data[0]);
+            alert("aaa");
+        },
+    });
+    var btn = document.getElementsByName("btn");
+    btn[0].onclick = function () {
+        window.location.href="add.html"
+    }
+    btn[1].onclick = function () {
+        window.location.href="add.html"
+    }
+</script>
 </html>
