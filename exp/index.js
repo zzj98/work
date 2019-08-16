@@ -70,7 +70,7 @@ app.get("/del/:id", function (req, res) {
 app.get("/toUpdate/:id", function (req, res) {
     var id = req.params.id;
     var sql = "select * from user where id = " + id;
-    console.log(sql);
+    // console.log(sql);
     db.query(sql, function (err, rows) {
         if (err) {
             res.send("修改页面跳转失败");
@@ -86,12 +86,12 @@ app.get("/toUpdate/:id", function (req, res) {
         }
     });
 });
+
 app.get("/update", function (req, res) {
     var parseObj = url.parse(req.url, true);
     req.query = parseObj.query;
     var results = "Username = '" + req.query.Username + "'" + "," + " Password = '" + req.query.Password + "'" + "," + " Name = '" + req.query.Name + "'" + "," + " Sex = '" + req.query.Gender + "'" + "," + " Professional = '" + req.query.Professional + "'" ;
-    var id = req.query.id;
-    var sql = "update user set " + results + " where id = " + id;
+    var sql = "update user set " + results + " where Username = '" +  req.query.Username + " '";
     db.query(sql, function (err, rows) {
         if (err) {
             res.send("修改失败 " + err);
@@ -100,6 +100,7 @@ app.get("/update", function (req, res) {
         }
     });
 });
+
 
 /**
  * 查询

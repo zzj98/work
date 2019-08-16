@@ -2,21 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>注册</title>
+    <title>修改页面</title>
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
 <div class="box" style="height:400px">
     <div class="content">
-        <form action="/add" method="get">
+        <form action="/update" method="get">
+            <!--<input type="hidden" value="<%= id %>" name="id">-->
             <input type="text" name="Username" placeholder="Username">
             <input type="text" name="Password" placeholder="Password">
             <input type="text" name="Name" placeholder="Name">
             <input type="text" name="Gender" placeholder="Gender">
             <input type="text" name="Professional" placeholder="Professional">
-            <input type="submit" value="注册">
+            <input type="submit" value="修改">
         </form>
     </div>
 </div>
+</form>
 </body>
 </html>

@@ -78,3 +78,6 @@ tr:first-child {
     border-radius: 6px;
     cursor: pointer;
 }
+.col{
+    color: gray;
+}

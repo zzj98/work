@@ -15,6 +15,7 @@ body{
     left: 50%;
     transform: translate(-50%,-50%);
     background: #191919;
+    opacity:0.89;
     text-align: center;
 }
 .box h1{
@@ -58,10 +59,10 @@ body{
 
 .box input[type = "button"]{
     background: none;
-    margin: 0 30px auto;
+    margin: 0 20px auto;
     text-align: center;
     border: 2px solid #8e44ad;
-    padding: 6px 18px;
+    padding: 3px 12px;
     outline: none;
     color: white;
     border-radius: 24px;
