@@ -18,8 +18,8 @@ app.get("/submit", function (req,res) {
         }
         text = result;
         console.log(text);
+        res.json(result);
     });
-    return text;
 });
 
 /**
