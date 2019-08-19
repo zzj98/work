@@ -2,15 +2,20 @@
 var express = require('express');
 var url = require('url');
 var app = express();
-var fs = require('fs');
-var text;
 var db = require("./config/db");
+var Cookies = require('cookies');
+var text;
+// var fs = require('fs');
 
 app.use('/static', express.static('index'));
 //设置模板引擎为ejs
 app.set('view engine', 'ejs'); //app = express() ;
 app.set('views', __dirname + '/views');
 
+//cookies进行签名(加密)
+var keys = ['keyboard cat'];
+
+//获取表单信息
 app.get("/submit", function (req,res) {
     db.query('SELECT * FROM user', function (err, result) {
         if (err) {
@@ -41,12 +46,12 @@ app.get("/add", function (req, res) {
         }
     });
 });
-app.post("/add", function (req, res) {
-    // var name = req.body.name;
-    // var age = req.body.age;
-
-
-});
+// app.post("/add", function (req, res) {
+//     // var name = req.body.name;
+//     // var age = req.body.age;
+//
+//
+// });
 
 /**
  * 删除用户
@@ -105,54 +110,96 @@ app.get("/update", function (req, res) {
 /**
  * 查询
  */
-app.post("/search", function (req, res) {
-    var name = req.body.s_name;
-    var age = req.body.s_age;
-    var sql = "select * from user";
-    if (name) {
-        sql += " where name = '" + name + "'";
-    }
-    //if(age){
-    //    sql += " and age = '" + age + "'";
-    //}
-
-    sql.replace("and", "where");
-    db.query(sql, function (err, rows) {
+app.get("/search", function (req,res) {
+    var parseObj = url.parse(req.url, true);
+    var cookies = new Cookies(req, res, { keys: keys });
+    var keep = 60000*3;
+    var flag = false;
+    var time;
+    var cook;
+    req.query = parseObj.query;
+    var sql  = "SELECT * FROM user where Username = '" + req.query.name + " '";
+    db.query(sql, function (err, result) {
         if (err) {
-            res.send("查询失败: " + err);
-        } else {
-            res.render("users", {title: "用户列表", datas: rows, s_name: name, s_age: age});
+            console.log('[SELECT ERROR]:', err.message);
+        }
+        console.log("-----------------");
+        console.log(result[0]);
+        // res.json(result[0]);
+        if (req.query.name === result[0].Username && req.query.pwd == result[0].Password) {
+            time = Math.round(new Date() / 1000) + keep / 1000;
+            cook =  Math.floor(Math.random () * 900) + 100;
+            cookies.set('cookie',cook,{maxAge:keep});
+            // console.log("time:"+time+"&& cook:"+cook);
+            res.render('index', {
+                id: result[0].id,
+                username: result[0].Username,
+                pwd: result[0].Password,
+                name: result[0].Name,
+                gender: result[0].Sex,
+                professional: result[0].Professional,
+            });
+        //     res.end();
+        //     flag = true;
+        }
+        if (flag == false) {
+            console.log('404 THIS IS A ERR!');
+            res.end();
+        }
+        if(result[0].Cookie==null){
+            var results = "Cookie = '" + cook + "'" + "," + " Keep = '" + time + " '";
+            var sql = "update user set " + results + " where Username = '" +  req.query.name + " '";
+            db.query(sql, function (err, rows) {
+                console.log(sql);
+                console.log("Cookie添加成功！！！")
+            });
         }
     });
 });
 
 module.exports = db;
 
-app.get('/get', function (req, res) {
-    var parseObj = url.parse(req.url, true);
-    var flag = false;
-    req.query = parseObj.query;
-    // res.send('Hello World');
-    // text = require('./index/text');//要获取的json文件
-    for (var i = 0; i < text.length; i++) {
-        console.log(text[i]);
-        if (req.query.name === text[i].Username && req.query.pwd == text[i].Password) {
-            res.render('index', {
-                id: text[i].id,
-                username: text[i].Username,
-                pwd: text[i].Password,
-                name: text[i].Name,
-                gender: text[i].Sex,
-                professional: text[i].Professional,
-            });
-            res.end();
-            flag = true;
-        }
-    }
-    if (flag == false) {
-        res.send('404 THIS IS A ERR!')
-    }
-});
+// app.get('/get', function (req, res) {
+//     var parseObj = url.parse(req.url, true);
+//     var cookies = new Cookies(req, res, { keys: keys });
+//     var flag = false;
+//     var time;
+//     var cook;
+//     req.query = parseObj.query;
+//     // res.send('Hello World');
+//     // text = require('./index/text');//要获取的json文件
+//     for (var i = 0; i < text.length; i++) {
+//         console.log(text[i]);
+//         var keep = 60000*3;
+//         if (req.query.name === text[i].Username && req.query.pwd == text[i].Password) {
+//             time = Math.round(new Date() / 1000) + keep / 1000;
+//             cook =  Math.floor(Math.random () * 900) + 100;
+//             cookies.set('cookie',cook,{maxAge:keep});
+//             // console.log("time:"+time+"&& cook:"+cook);
+//             res.render('index', {
+//                 id: text[i].id,
+//                 username: text[i].Username,
+//                 pwd: text[i].Password,
+//                 name: text[i].Name,
+//                 gender: text[i].Sex,
+//                 professional: text[i].Professional,
+//             });
+//             res.end();
+//             flag = true;
+//         }
+//     }
+//     if(req.query.name==""){
+//         var results = "Cookie = '" + cook + "'" + "," + " Keep = '" + time + " '";
+//         var sql = "update user set " + results + " where Username = '" +  req.query.name + " '";
+//         db.query(sql, function (err, rows) {
+//             console.log(sql);
+//             console.log("Cookie添加成功！！！")
+//         });
+//     }
+//     if (flag == false) {
+//         res.send('404 THIS IS A ERR!')
+//     }
+// });
 
 // app.get('/index/submit', function (req, res) {
 //     var parseObj = url.parse(req.url, true);
@@ -169,4 +216,5 @@ app.get('/get', function (req, res) {
 
 app.listen(8081, function () {
     console.log("load http://127.0.0.1:8081");
+    console.log("load http://http://zzj19980514.xyz:8081");
 });

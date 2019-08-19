@@ -14,3 +14,15 @@
     https://www.jianshu.com/p/9955591c4a31
     2：修改表单格式为utf-8
     https://blog.csdn.net/weixin_44092289/article/details/86931898
+
+cookie作用于判断用户是否登录
+    1：如果cookie不存在 应显示基本页面
+    2：如果cookie存在且尚未过期 显示用户登录后界面
+    3：如果cookie存在且已经过期 提示用户重新登录
+cookie使用方法
+    1：在用户登录时设置或更新cookie以及cookie存在时间
+    2：在用户访问页面时判断cookie是否存在
+        1）cookie存在 获取存在时间 判断是否过期
+            1)) 未过期 可也访问登录后页面
+            2)) 已过期 可以访问基本页面 且删除过期cookie
+        2）cookie不存在 可以访问基本页面

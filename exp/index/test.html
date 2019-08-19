@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="./js/jquery-3.4.1.min.js"></script>
+</head>
+<body>
+</body>
+<script>
+    $.ajax({
+        url: "/test",
+        type: "get",
+        contentType: "application/json;charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            console.log(data);
+            alert("aaa");
+        },
+    });
+</script>
+</html>

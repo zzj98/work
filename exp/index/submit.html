@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="bbackground" style="">
-    <form class="box" action="/get" method="get">
+    <form class="box" action="/search" method="get">
         <h1>Login</h1>
         <input type="text" name="name" placeholder="Username">
         <input type="text" name="pwd" placeholder="Password">
@@ -19,15 +19,15 @@
 </div>
 </body>
 <script>
-    $.ajax({
-        url: "/submit",
-        type: "get",
-        contentType: "application/json;charset=utf-8",
-        dataType: "json",
-        success: function (data) {
-            console.log(data);
-        },
-    });
+    // $.ajax({
+    //     url: "/submit",
+    //     type: "get",
+    //     contentType: "application/json;charset=utf-8",
+    //     dataType: "json",
+    //     success: function (data) {
+    //         console.log(data);
+    //     },
+    // });
     var btn = document.getElementsByName("btn");
     btn[0].onclick = function () {
         window.location.href="add.html"
